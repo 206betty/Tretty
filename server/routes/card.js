@@ -9,6 +9,12 @@ cardRouter.get('/', (req, res) => {
 
     })
 })
+cardRouter.get('/:id', (req, res) => {
+    card.findById({_id: req.params.id }, (err, card) => {
+        if(err) return res.status(500).send(err);
+        return res.status(200).send(card)
+    })
+})
 
 cardRouter.post('/', (req, res) => {
     const newCard = new card(req.body)
@@ -17,9 +23,10 @@ cardRouter.post('/', (req, res) => {
         return res.status(201).send(newcard)
     })
 })
+
 cardRouter.put('/:id', (req, res) => {
     card.findByIdAndUpdate(
-        {_id: req.params.id },
+        req.params.id,
         req.body,
         {new: true},
         (err, updatedCard) => {
