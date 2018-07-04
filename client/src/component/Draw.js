@@ -11,7 +11,7 @@ class Draw extends React.Component{
         const { imgUrl } = this.props.current;
         return(
             <div>
-                <img className="drawImg" src={imgUrl} alt='card'/>
+                <img className="drawImg" src={imgUrl} alt='card'/> <br/>
                 <button onClick={this.handleClick} className="drawBtn">Draw Card</button>
             </div>
         )

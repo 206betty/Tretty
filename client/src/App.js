@@ -16,10 +16,16 @@ class App extends Component {
     }
 
     return (
-      <div> 
-        <h1>LOTERIA</h1>
-        <Draw />
-        <Board />
+      <div>
+        <div className="header">
+          <h1 className="title">~  LOTERIA  ~</h1>
+        </div>
+        <div className="drawcard">
+          <Draw />
+        </div>
+        <div>
+          <Board />
+        </div>
       </div>
     );
   }
