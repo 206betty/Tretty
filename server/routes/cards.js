@@ -1,8 +1,9 @@
 const express = require('express')
 const cardRouter = express.Router()
 const card = require('../models/card')
+// const checkAuth = require('../middleware/check-auth');
 
-cardRouter.get('/', (req, res) => {
+cardRouter.get('/', (req, res) => {       
     card.find((err, card) => {
         if(err) return res.status(500).send(err)
         return res.status(200).send(card)
@@ -16,7 +17,7 @@ cardRouter.get('/:id', (req, res) => {
     })
 })
 
-cardRouter.post('/', (req, res) => {
+cardRouter.post('/', (req, res) => {      
     const newCard = new card(req.body)
     newCard.save((err, newcard) => {
         if(err) return res.status(500).send(err)
