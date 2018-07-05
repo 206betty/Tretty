@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Draw from "./component/Draw"
-import { connect } from 'react-redux'
+import Draw from "./component/Draw";
+import { connect } from 'react-redux';
+import SignUp from './component/SignUp';
 
 
 class App extends Component {
@@ -9,6 +10,7 @@ class App extends Component {
       <div> 
       <h1>LOTERIA</h1>
       <Draw />
+      <SignUp/>
       </div>
     );
   }

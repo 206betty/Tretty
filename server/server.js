@@ -15,8 +15,9 @@ mongoose.connect('mongodb://localhost/loteria', (err)=> {
     console.log('connected to database')
 })
 
-app.use('/card', require('./routes/card'))
+
 app.use("/user", userRoutes);
+app.use("/card", require('./routes/card'))
 
 app.listen(3500, () => {
     console.log('server is running on port 3500')

@@ -1,63 +1,13 @@
-import { createStore, applyMiddleware } from "redux"
-import axios from "axios"
+import { combineReducers, createStore, applyMiddleware } from "redux"
 import thunk from "redux-thunk"
+import cardReducer from './card'
+import userReducer from './SignUp'
 
-export const getCard = () => {
-    return dispatch => {
-        axios.get('/card').then(response => {
-            dispatch({
-                type: "GET_CARD",
-                card: response.data
-            })
-        })
-    }
-}
-
-export const addCard = newCard => {
-    return dispatch => {
-        axios.post('./card', newCard).then(response => {
-            dispatch(getCard())
-        }).catch(err => {
-            console.log(err)
-        })
-    }
-}
-
-export const deleteCard = id => {
-    return dispatch => {
-        axios.delete(`/card/${id}`).then(response => {
-            dispatch(getCard())
-        }).catch(err => {
-            console.log(err)
-        })
-    }
-} 
-
-export const editCard = (id, newCard) => {
-    return dispatch => {
-        axios.put(`card/${id}`, newCard).then(response => {
-            dispatch(getCard())
-        }).catch(err => {
-            console.log(err)
-        })
-    }
-}
-
-const initialState = {
-    cards: []
-}
-
-const reducer = (state = initialState, action) => {
-    switch (action.type) {
-        case "GET_CARD":
-            return {
-                ...state,
-                cards: action.card
-            }
-        default:
-            return state
-    }
-}
+const reducer = combineReducers({
+    cards: cardReducer,
+    user: userReducer
+    
+})
 
 export default createStore(
     reducer,

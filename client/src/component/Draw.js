@@ -1,5 +1,5 @@
 import React from 'react'
-import { getCard } from '../redux';
+import { getCard } from '../redux/card';
 import { connect } from 'react-redux'
 import Card from './CardDraw'
 
@@ -21,4 +21,4 @@ class Draw extends React.Component{
     }
 }
   
-export default connect(state => state, { getCard })(Draw)
+export default connect(state => state.cards, { getCard })(Draw)
