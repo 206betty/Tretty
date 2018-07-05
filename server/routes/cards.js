@@ -1,7 +1,6 @@
 const express = require('express')
 const cardRouter = express.Router()
 const card = require('../models/card')
-// const checkAuth = require('../middleware/check-auth');
 
 cardRouter.get('/', (req, res) => {       
     card.find((err, card) => {

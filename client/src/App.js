@@ -33,4 +33,4 @@ class App extends Component {
   }
 }
 
-export default connect(state => state, { getCards })(App);
+export default connect(state => state, { getCards })(App)
