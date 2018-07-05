@@ -2,13 +2,17 @@ import { createStore, applyMiddleware } from "redux"
 import axios from "axios"
 import thunk from "redux-thunk"
 
-export const shuffle = (cards, boardCards) => {
+export const shuffle = (cards, boardCards, oppBoardCards) => {
     let randomIndex = Math.floor(Math.random() * (53 - 0) + 0);
     let card = cards[randomIndex]
     let match = false;
+    let oppMatch = false;
     
     if (boardCards.find(currentCard => currentCard.number === card.number)) {
         match = card.number;
+    }
+    if (oppBoardCards.find(currentCard => currentCard.number === card.number)) {
+        oppMatch = card.number;
     }
     
     return {
@@ -16,7 +20,8 @@ export const shuffle = (cards, boardCards) => {
         imgUrl: card.imgUrl,
         name: card.name,
         number: card.number,
-        match
+        match,
+        oppMatch
     }
 
 }
@@ -26,12 +31,14 @@ export const getCards = () => {
         axios.get('/cards').then(response => {
             const cards = response.data;
             const boardCards = getRandom(cards, 16);
+            const oppBoardCards = getRandom(cards, 16);
             dispatch({
                 type: "GET_CARDS",
                 cards,
-                boardCards
+                boardCards,
+                oppBoardCards
             })
-            dispatch(shuffle(cards, boardCards));
+            dispatch(shuffle(cards, boardCards, oppBoardCards));
         })
     }
 }
@@ -52,40 +59,12 @@ function getRandom(arr, n) {
     return result;
 }
 
-// export const addCard = newCard => {
-//     return dispatch => {
-//         axios.post('./card', newCard).then(response => {
-//             dispatch(getCard())
-//         }).catch(err => {
-//             console.log(err)
-//         })
-//     }
-// }
-
-// export const deleteCard = id => {
-//     return dispatch => {
-//         axios.delete(`/card/${id}`).then(response => {
-//             dispatch(getCard())
-//         }).catch(err => {
-//             console.log(err)
-//         })
-//     }
-// } 
-
-// export const editCard = (id, newCard) => {
-//     return dispatch => {
-//         axios.put(`card/${id}`, newCard).then(response => {
-//             dispatch(getCard())
-//         }).catch(err => {
-//             console.log(err)
-//         })
-//     }
-// }
-
 const initialState = {
     cards: [],
     boardCards: [],
+    oppBoardCards: [],
     matches: [],
+    oppMatches: [],
     current: {
         imgUrl: '',
         name: '',
@@ -99,7 +78,8 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 cards: action.cards,
-                boardCards: action.boardCards
+                boardCards: action.boardCards,
+                oppBoardCards: action.oppBoardCards
             }
         case "SHUFFLE":
 
@@ -108,10 +88,16 @@ const reducer = (state = initialState, action) => {
             if (action.match && !matches.includes(action.match)) {
                 matches.push(action.match);
             }
+            let oppMatches = [ ...state.oppMatches ];
+
+            if (action.oppMatch && !oppMatches.includes(action.oppMatch)) {
+                oppMatches.push(action.oppMatch);
+            }
 
             return {
                 ...state,
                 matches,
+                oppMatches,
                 current: {
                     imgUrl: action.imgUrl,
                     name: action.name,

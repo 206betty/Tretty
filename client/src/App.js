@@ -17,11 +17,13 @@ class App extends Component {
 
     return (
       <div>
-        <div className="header">
-          <h1 className="title">~  LOTERIA  ~</h1>
-        </div>
-        <div className="drawcard">
-          <Draw />
+        <div className="mobileHeader">
+          <div className="header">
+            <h1 className="title">~  LOTERIA  ~</h1>
+          </div>
+          <div className="drawcard">
+            <Draw />
+          </div>
         </div>
         <div>
           <Board />
