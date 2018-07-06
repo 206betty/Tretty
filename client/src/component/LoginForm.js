@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { login, logout } from '../redux/signup';
+import { login, logout } from '../redux/auth';
 import { connect } from 'react-redux';
 
-class SignUp extends Component {
+class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,12 +26,13 @@ class SignUp extends Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <div>
                 <form onSubmit={this.onSubmit}>
                     <div className='form-inline'>
 
-                        {this.props.loggedIn === true ? <h1>Welcome: {this.props.user.email}</h1> : null}
+                        {this.props.loggedIn === true ? <h1>Welcome: {this.props.email}</h1> : null}
 
                         <div className='form-group'>
 
@@ -65,4 +66,4 @@ class SignUp extends Component {
         )
     };
 }
-export default connect(state => state.auth, { login, logout })(SignUp)
+export default connect(state => ({...state.auth.user}), { login, logout })(LoginForm)
