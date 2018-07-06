@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { make } from '../redux/make';
+import { make } from '../redux/auth';
 
 class SignupForm extends Component {
     constructor(props) {

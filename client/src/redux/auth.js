@@ -8,6 +8,20 @@ const initialState = {
     loggedIn: false
 }
 
+export const make = user => {
+    return dispatch =>{
+        axios.post('/make', user)
+        .then(response =>{
+            console.log(response.data)
+            localStorage.token = response.data.token
+            dispatch({
+                type: 'MAKE',
+                user: response.data.user
+            })
+        })
+    }
+}
+
 export const getUser = () => {
     return dispatch => {
         axios.get('/user').then(response => {
@@ -42,7 +56,7 @@ export const getUser = () => {
  }
 
 
-const userReducer = (state = initialState, action) => {
+const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case "GET_USER":
             return {
@@ -60,9 +74,15 @@ const userReducer = (state = initialState, action) => {
              loggedIn: false,
              user: {}
          }
+         case 'MAKE':
+         return {
+             ...state,
+            loggedIn: true,
+            user: action.user 
+         }
         default:
             return state
     }
 }
 
-export default userReducer;
+export default authReducer;
