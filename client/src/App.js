@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Draw from "./component/Draw"
 import { connect } from 'react-redux'
-import Board from "./component/Board"
-import LoginForm from './component/LoginForm';
 import { getCards } from './redux/card';
-import SignupForm from './component/SignupForm';
+import Login from "./component/Login";
+import { Switch, Route } from "react-router-dom";
+import Game from "./component/Game"
+import Signup from "./component/Signup"
 
 
 class App extends Component {
@@ -20,19 +20,11 @@ class App extends Component {
 
     return (
       <div>
-        <div className="mobileHeader">
-          <div className="header">
-            <h1 className="title">~  LOTERIA  ~</h1>
-          </div>
-          <div className="drawcard">
-            <Draw />
-          </div>
-        </div>
-        <div>
-          <Board />
-        </div>
-        <LoginForm />
-        <SignupForm/>
+        <Switch>
+          <Route path="/login" component={Login}/>        
+          <Route path="/signup" component={Signup}/>
+          <Route path="/" component={Game}/>
+        </Switch>
       </div>
     );
   }
