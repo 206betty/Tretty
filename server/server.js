@@ -15,7 +15,7 @@ mongoose.connect('mongodb://localhost/loteria', (err)=> {
     console.log('connected to database')
 })
 
-app.use('/card', require('./routes/cards'))
+app.use('/cards', require('./routes/cards'))
 app.use("/user", userRoutes);
 
 app.listen(3500, () => {
