@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import Draw from "./component/Draw"
 import { connect } from 'react-redux'
 import Board from "./component/Board"
-import SignUp from './component/SignUp';
-import { getCards } from './redux/card'
+import LoginForm from './component/LoginForm';
+import { getCards } from './redux/card';
+import SignupForm from './component/SignupForm';
+
 
 class App extends Component {
   componentDidMount() {
@@ -29,7 +31,8 @@ class App extends Component {
         <div>
           <Board />
         </div>
-        <SignUp />
+        <LoginForm />
+        <SignupForm/>
       </div>
     );
   }

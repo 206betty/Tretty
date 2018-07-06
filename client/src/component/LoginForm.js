@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { login, logout } from '../redux/signup';
 import { connect } from 'react-redux';
 
-class SignUp extends Component {
+class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -65,4 +65,4 @@ class SignUp extends Component {
         )
     };
 }
-export default connect(state => state.auth, { login, logout })(SignUp)
+export default connect(state => state.auth, { login, logout })(LoginForm)
