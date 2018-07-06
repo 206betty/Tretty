@@ -47,12 +47,10 @@ export const getUser = () => {
  }
 
  export const logout = () => {
-     return dispatch =>{
-        localStorage.token = null
-        dispatch({
-            type: 'LOGOUT'
-        })
-     }
+     localStorage.removeItem('token');
+     return {
+        type: 'LOGOUT'
+    }
  }
 
 

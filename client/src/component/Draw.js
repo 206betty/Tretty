@@ -16,7 +16,7 @@ class Draw extends React.Component{
                     <img className="drawImg" src={imgUrl} alt='card'/>
                 </div>
                 <div className="btnHome">
-                    <p className="hola">Hola {this.props.auth.name || "User"}!</p>
+                    <p className="hola">Hola {this.props.auth.user.name || "User"}!</p>
                     <button onClick={this.handleClick} className="drawBtn">Draw Card</button>
                     <p className="oppName">Your Opponent (Advisario)</p>
                 </div>
