@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-
-const initialState ={
+const initialState = {
     user: {
-
+        name: "",
+        email: ""
     },
     loggedIn: false
 }
@@ -13,7 +13,7 @@ export const getUser = () => {
         axios.get('/user').then(response => {
             dispatch({
                 type: "GET_USER",
-                User: response.data
+                user: response.data
             })
         })
     }
@@ -26,7 +26,7 @@ export const getUser = () => {
                 localStorage.token = response.data.token
                 dispatch({
                     type: 'LOGIN',
-                    user: user
+                    user: response.data.user
                 })
             })
         }

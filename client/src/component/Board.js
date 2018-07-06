@@ -37,4 +37,4 @@ class Board extends React.Component {
     }
 }
 
-export default connect(state => state)(Board)
+export default connect(state => state.game)(Board)

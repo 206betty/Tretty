@@ -3,10 +3,10 @@ import Draw from "./component/Draw"
 import { connect } from 'react-redux'
 import Board from "./component/Board"
 import SignUp from './component/SignUp';
-import { getCards } from './redux'
+import { getCards } from './redux/card'
 
 class App extends Component {
-  componentDidMount(){
+  componentDidMount() {
     this.props.getCards()
   }
   render() {
@@ -29,10 +29,10 @@ class App extends Component {
         <div>
           <Board />
         </div>
-        <SignUp/>
+        <SignUp />
       </div>
     );
   }
 }
 
-export default connect(state => state, { getCards })(App)
+export default connect(state => state.game, { getCards })(App)
