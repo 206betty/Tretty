@@ -1,12 +1,40 @@
 import React from 'react'
-import { getCard } from '../redux';
 import { connect } from 'react-redux'
-import Card from './CardBoard'
 
-// filter to get 16 random cards
+class Board extends React.Component {
+    render () {
+        const { matches, oppMatches } = this.props;
+        const boardClassName = matches.length === 16 ? 'board won' : 'board';
+        const oppBoardClassName = oppMatches.length === 16 ? 'board won' : 'board';
+        return (
+            <div className="boards">
+                <div className={boardClassName}>
+                    {this.props.boardCards.map(card => {
+                        const cardClassName = matches.includes(card.number) ? 'card matched' : 'card'; 
+                        return (
+                            <div key={card._id} className={cardClassName}>
+                                <span>
+                                    <img className="boardImg" src={card.imgUrl} alt={card.name} />
+                                </span>
+                            </div>
+                        )
+                    })}
+                </div>
+                <div className={oppBoardClassName}>
+                    {this.props.oppBoardCards.map(card => {
+                        const cardClassName = oppMatches.includes(card.number) ? 'card matched' : 'card'; 
+                        return (
+                            <div key={card._id} className={cardClassName}>
+                                <span>
+                                    <img className="boardImg" src={card.imgUrl} alt={card.name} />
+                                </span>
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
+        );
+    }
+}
 
-// map to board
-
-// filter to get 16 random cards and layout in css link to page like card.js for draw
-
-export default connect(state => state)(Card)
+export default connect(state => state)(Board)
