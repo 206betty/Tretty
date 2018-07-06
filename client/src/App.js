@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { getCards } from './redux/card';
 import Login from "./component/Login";
-import { Switch, Route } from "react-router-dom";
+import { withRouter, Switch, Route } from "react-router-dom";
 import Game from "./component/Game"
 import Signup from "./component/Signup"
+import Menu from "./component/Menu"
 
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
 
     return (
       <div>
+        <Menu />
         <Switch>
           <Route path="/login" component={Login}/>        
           <Route path="/signup" component={Signup}/>
@@ -30,4 +32,4 @@ class App extends Component {
   }
 }
 
-export default connect(state => state.game, { getCards })(App)
+export default withRouter(connect(state => state.game, { getCards })(App))
