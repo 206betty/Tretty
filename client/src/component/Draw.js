@@ -4,7 +4,8 @@ import { shuffle } from '../redux/card';
 
 class Draw extends React.Component{
     handleClick = (event) => {
-        const { shuffle, cards, boardCards, oppBoardCards } = this.props;
+        const { cards, boardCards, oppBoardCards } = this.props.game;
+        const { shuffle } = this.props
         shuffle(cards, boardCards, oppBoardCards);
     }
     render(){
